@@ -25,7 +25,7 @@ def main(batch_size: int = 32) -> int:
             chunk = rows[i:i + batch_size]
             texts = [(r.title + " " + (r.summary or "")) for r in chunk]
             results = analyze_batch(texts)
-            for r, res in zip(chunk, results):
+            for r, res in zip(chunk, results, strict=False):
                 r.sentiment_label = res.label
                 r.sentiment_score = res.score
             session.commit()
@@ -37,3 +37,4 @@ def main(batch_size: int = 32) -> int:
 if __name__ == "__main__":
     n = main()
     print(f"Enrichies: {n}")
+

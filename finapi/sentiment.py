@@ -61,5 +61,6 @@ def analyze_batch(texts: list[str]) -> list[SentimentResult]:
             score=round(float(o["score"]), 4),
             text_preview=t[:80] + ("..." if len(t) > 80 else ""),
         )
-        for t, o in zip(truncated, outputs)
+        for t, o in zip(truncated, outputs, strict=False)
     ]
+
