@@ -1,0 +1,30 @@
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Bytecode Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Outils de dev
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Données / secrets
+*.env
+.env.local
+data/
+*.db
