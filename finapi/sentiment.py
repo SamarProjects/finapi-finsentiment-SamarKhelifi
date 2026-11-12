@@ -14,7 +14,7 @@ from transformers import pipeline
 log = logging.getLogger(__name__)
 
 MODEL_NAME = "ProsusAI/finbert"
-MAX_TOKENS = 512
+MAX_TOKENS = 512  # FinBERT (BERT) max sequence length, in tokenizer tokens
 
 
 @dataclass
@@ -38,7 +38,7 @@ def analyze(text: str) -> SentimentResult:
     if not text or not text.strip():
         raise ValueError("Texte vide")
     pipe = get_pipeline()
-    out = pipe(text[:MAX_TOKENS])[0]
+    out = pipe(text, truncation=True, max_length=MAX_TOKENS)[0]
     return SentimentResult(
         label=out["label"].lower(),
         score=round(float(out["score"]), 4),
@@ -51,16 +51,15 @@ def analyze_batch(texts: list[str]) -> list[SentimentResult]:
     if not texts:
         return []
     pipe = get_pipeline()
-    truncated = [t[:MAX_TOKENS] for t in texts if t and t.strip()]
-    if not truncated:
-        return []
-    outputs = pipe(truncated, batch_size=16)
-    return [
-        SentimentResult(
-            label=o["label"].lower(),
-            score=round(float(o["score"]), 4),
-            text_preview=t[:80] + ("..." if len(t) > 80 else ""),
-        )
-        for t, o in zip(truncated, outputs, strict=False)
-    ]
-
+    cleaned = [t for t in texts if t and t.strip()]
+if not cleaned:
+    return []
+outputs = pipe(cleaned, batch_size=16, truncation=True, max_length=MAX_TOKENS)
+return [
+    SentimentResult(
+        label=o["label"].lower(),
+        score=round(float(o["score"]), 4),
+        text_preview=t[:80] + ("..." if len(t) > 80 else ""),
+    )
+    for t, o in zip(cleaned, outputs, strict=True)
+]
