@@ -1,12 +1,12 @@
 """Client HTTP pour l'API Flask finapi."""
 
+
 from __future__ import annotations
-
 from typing import Any
-
+import os
 import requests
 
-API_BASE = "http://localhost:5000"
+API_BASE = os.getenv("Finapi_URL", "http://localhost:5000").restrip("/")
 
 
 class APIError(Exception):
