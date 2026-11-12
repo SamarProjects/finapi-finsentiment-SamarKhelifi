@@ -63,7 +63,7 @@ def sentiment_pie_chart(distribution: dict[str, int]) -> go.Figure:
         textinfo="label+percent",
     )
     fig.update_layout(
-        margin=dict(l=10, r=10, t=30, b=10),
+        margin=dict(l=40, r=40, t=40, b=40),
         height=320,
         showlegend=True,
     )
