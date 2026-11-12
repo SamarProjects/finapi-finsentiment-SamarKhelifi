@@ -52,14 +52,14 @@ def analyze_batch(texts: list[str]) -> list[SentimentResult]:
         return []
     pipe = get_pipeline()
     cleaned = [t for t in texts if t and t.strip()]
-if not cleaned:
-    return []
-outputs = pipe(cleaned, batch_size=16, truncation=True, max_length=MAX_TOKENS)
-return [
-    SentimentResult(
-        label=o["label"].lower(),
-        score=round(float(o["score"]), 4),
-        text_preview=t[:80] + ("..." if len(t) > 80 else ""),
-    )
-    for t, o in zip(cleaned, outputs, strict=True)
-]
+    pipe = get_pipeline()
+    cleaned = [t for t in texts if t and t.strip()]
+    if not cleaned:
+        return []
+    outputs = pipe(cleaned, batch_size=16, truncation=True, max_length=MAX_TOKENS)
+    return [
+        SentimentResult(
+            ...
+        )
+        for t, o in zip(cleaned, outputs, strict=True)
+    ]

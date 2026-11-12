@@ -196,8 +196,9 @@ def create_app() -> Flask:
 
 if __name__ == "__main__":
     import os
-
+    
     create_app().run(
         host=os.getenv("FINAPI_HOST", "127.0.0.1"),
-        port=int(os.getenv("FINAPI_PORT", "5000"))
-        debug=os.getenv("FINAPI_DEGUB", "false").lower() == "true")
+        port=int(os.getenv("FINAPI_PORT", "5000")),
+        debug=os.getenv("FINAPI_DEBUG", "false").lower() == "true",
+    )

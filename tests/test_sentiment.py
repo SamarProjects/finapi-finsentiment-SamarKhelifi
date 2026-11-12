@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -34,9 +34,6 @@ def test_analyze_empty_raises():
     with pytest.raises(ValueError):
         analyze("")
 
-
-
-from unittest.mock import MagicMock
 
 @patch("finapi.sentiment.get_pipeline")
 def test_analyze_uses_token_truncation(mock_get_pipe):
