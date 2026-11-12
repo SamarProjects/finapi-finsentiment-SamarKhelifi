@@ -130,7 +130,7 @@ else:
         st.markdown(
             f"<div style='border-left: 4px solid {color};"
             f" padding: 8px 14px; margin: 4px 0;"
-            f" background: #F8FAFC; border-radius: 4px;'>"
+            f" background: #F8FAFC; color: #0F172A; border-radius: 4px;'>"
             f"<b>{n['title']}</b><br>"
             f"<small style='color:#64748B'>"
             f"{n['publisher']} · {n['published_at'][:16]} · "
