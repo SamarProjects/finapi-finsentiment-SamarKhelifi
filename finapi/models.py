@@ -1,4 +1,4 @@
-"""Modèles SQLAlchemy : prix et news (avec sentiment depuis Lab 3)."""
+"""SQLAlchemy models: price records and news items (with sentiment)."""
 
 from sqlalchemy import (
     Column,
@@ -41,7 +41,7 @@ class NewsItem(Base):
     url = Column(String(1024), unique=True)
     summary = Column(String(2048))
 
-    # === Lab 3 : enrichissement sentiment ===
+    # === Sentiment enrichment (FinBERT) ===
     sentiment_label = Column(String(16), nullable=True, index=True)
     sentiment_score = Column(Float, nullable=True)
 

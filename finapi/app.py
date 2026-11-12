@@ -1,4 +1,4 @@
-"""Application Flask — Lab 3 : ajout des endpoints sentiment."""
+"""FinSentiment REST API (Flask): prices, news and FinBERT sentiment endpoints."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ def create_app() -> Flask:
 
     init_db()
 
-    # ---------- Endpoints Lab 1 ----------
+    # ---------- Health & live market data ----------
 
     @app.get("/health")
     def health():
@@ -70,7 +70,7 @@ def create_app() -> Flask:
             ],
         })
 
-    # ---------- Endpoints Lab 2 (DB) ----------
+    # ---------- Database endpoints ----------
 
     @app.get("/db/prices/<ticker>")
     def db_prices(ticker: str):
@@ -131,7 +131,7 @@ def create_app() -> Flask:
             "tickers": sorted(tickers),
         })
 
-    # ---------- Nouveaux endpoints Lab 3 (sentiment) ----------
+    # ---------- Sentiment endpoints ----------
 
     @app.post("/sentiment")
     def sentiment():
